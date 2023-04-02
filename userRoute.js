@@ -21,6 +21,16 @@ router.post('/register', async (req, res) => {
     }
 })
 
+router.get('/users', async (req, res) => {
+    try {
+      const users = await userModel.find();
+      res.json(users);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+
 router.post('/login', async (req, res) => {
     const {email, password} = req.body
     try {
